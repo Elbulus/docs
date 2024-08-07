@@ -62,9 +62,12 @@ theme:
 
 plugins:
   - privacy:
-      assets: false
+      enabled: !ENV [CI, false]
+      cache: true
+      cache_dir: .cache/plugin/privacy
+      assets: true
+      assets_fetch: true
       links_attr_map:
-        rel: noreferrer
         target: _blank
       links_noopener: true
   - search:
@@ -72,7 +75,7 @@ plugins:
   - meta
   - optimize:
       cache: true
-      cache_dir: .cache/plugins/optimize
+      cache_dir: .cache/plugin/optimize
       enabled: !ENV [CI, false]
       optimize_png: true
       optimize_png_speed: 1
@@ -81,6 +84,13 @@ plugins:
       optimize_jpg_quality: 75
       optimize_jpg_progressive: true
   - git-revision-date-localized
+  - minify:
+      minify_html: true
+  - git-committers:
+      enabled: !ENV [CI, false]
+      cache_dir: .cache/plugin/git-committers/
+      repository: saltyorg/docs
+      branch: main
 
 extra:
   generator: false
@@ -205,7 +215,6 @@ nav:
           - Filebot: sandbox/apps/filebot.md
           - Filebrowser: sandbox/apps/filebrowser.md
           - Filezilla: sandbox/apps/filezilla.md
-          - Jirafeau: sandbox/apps/jirafeau.md
           - Krusader: sandbox/apps/krusader.md
           - Paperless-NGX: sandbox/apps/paperless-ngx.md
           - PrivateBin: sandbox/apps/privatebin.md
@@ -216,6 +225,8 @@ nav:
           - Homarr: sandbox/apps/homarr.md
           - Homepage: sandbox/apps/homepage.md
         - Game Servers:
+          - LinuxGSM: sandbox/apps/lgsm.md
+          - MC-Router: sandbox/apps/mcrouter.md
           - Minecraft: sandbox/apps/minecraft.md
           - Minecraft Bedrock: sandbox/apps/minecraft-bedrock.md
         - Media Management:
@@ -236,8 +247,8 @@ nav:
           - Metadata Management:
             - Alternatrr: sandbox/apps/alternatrr.md
             - Alternatrrx: sandbox/apps/alternatrrx.md
+            - Kometa: sandbox/apps/kometa.md
             - MKVToolNix: sandbox/apps/mkvtoolnix.md
-            - Plex Meta Manager: sandbox/apps/plex-meta-manager.md
             - Plex-Utills: sandbox/apps/plex-utills.md
             - Python-plexlibrary: sandbox/apps/python-plexlibrary.md
             - Unmanic: sandbox/apps/unmanic.md
@@ -289,15 +300,19 @@ nav:
             - Adminer: sandbox/apps/adminer.md
             - PGAdmin: sandbox/apps/pgadmin.md
           - Docker:
-            - Ouroboros: sandbox/apps/ouroboros.md
+            - Dockwatch: sandbox/apps/dockwatch.md
             - Watchtower: sandbox/apps/watchtower.md
           - Flaresolverr: sandbox/apps/flaresolverr.md
           - FreshRSS: sandbox/apps/freshrss.md
-          - Grafana: sandbox/apps/grafana.md
           - Guacamole: sandbox/apps/guacamole.md
           - Handbrake: sandbox/apps/handbrake.md
           - Influxdb: sandbox/apps/influxdb.md
+          - Influxdb2: sandbox/apps/influxdb2.md
           - Invoice Ninja: sandbox/apps/invoiceninja.md
+          - Home Automation:
+            - Home Assistant: sandbox/apps/homeassistant.md
+            - MQTT: sandbox/apps/mqtt.md
+            - Node-Red: sandbox/apps/node-red.md
           - Log Management:
             - GoAccess: sandbox/apps/goaccess.md
             - Logarr: sandbox/apps/logarr.md
@@ -305,7 +320,7 @@ nav:
           - Networking:
             - Kcptun-client: sandbox/apps/kcptun-client.md
             - Kcptun-server: sandbox/apps/kcptun-server.md
-            - Unifi: sandbox/apps/unifi.md
+            - Unifi Network Application: sandbox/apps/unifi-network-application.md
             - Wireguard: sandbox/apps/wireguard.md
           - MakeMKV: sandbox/apps/makemkv.md
           - Puddletag: sandbox/apps/puddletag.md
@@ -392,12 +407,14 @@ nav:
       - Plex Autoscan: faq/Plex-Autoscan.md
       - ruTorrent: faq/ruTorrent.md
       - Misc: faq/Misc.md
+      - sb: faq/sb.md
 
   - Advanced:
       - Index: advanced/index.md
       - Adding Your Own Containers: advanced/your-own-containers.md
       - Container Healthchecks: advanced/healthchecks.md
       - Styled Error Pages: advanced/styled-error-pages.md
+      - Tailscale: advanced/tailscale.md
       - Themepark Styles for apps: advanced/themepark.md
       - User crontab examples: advanced/user-crontab-examples.md
       - Feeder Mount: advanced/feeder.md
@@ -410,7 +427,6 @@ nav:
               - Did my Saltbox install succeed?: reference/guides/chazguides/success.md
               - How do I mount a cloud drive?: reference/guides/chazguides/teamdrive.md
               - I can't see my media!: reference/guides/chazguides/no-media.md
-              - I want some app to load at my base domain: reference/guides/chazguides/base-domain.md
               - Why is my disk full?: reference/guides/chazguides/disk-full.md
               - Installing Saltbox on a home server: reference/guides/chazguides/home-server.md
               - Obsolete and deprecated:
@@ -428,6 +444,7 @@ nav:
         - Dropbox:
           - General Dropbox Topics: reference/guides/dropbox-general.md
         - Rclone:
+          - Creating an Rclone remote: reference/guides/rclone-remote-generic.md
           - Creating a Dropbox remote: reference/guides/rclone-remote-dropbox.md
           - Creating a Google remote: reference/guides/rclone-remote.md
           - Creating a Crypt remote: reference/guides/rclone-remote-encrypted.md
@@ -481,4 +498,3 @@ nav:
           - Using Local Storage: reference/local-storage.md
           - Mounting disks: reference/guides/mount.md
           - HW transcoding on OVH: reference/OVH.md
-

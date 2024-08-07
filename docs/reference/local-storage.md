@@ -1,3 +1,11 @@
+---
+hide:
+  - tags
+tags:
+  - local
+  - storage
+---
+
 # Local Storage
 
 You may want to set saltbox up to use "local storage".  This article is assuming you are doing this as part of the initial setup, not switching from cloud to local.
@@ -32,9 +40,23 @@ As you will recall from the earlier "How does Saltbox Work" lesson, this means e
 
 ## *Local to your site* storage, as in a NAS or the like on your network
 
-In this case, it's best to use the same rclone + cloudplow model that the standard cloud storage setup uses.
+In this case, it's simplest to use the same rclone + cloudplow model that the standard cloud storage setup uses.
 
-First, create an rclone remote pointing to your NAS using whatever connection scheme you wish; SMB, SFTP, etc.  Call it whatever you like.  
+<details>
+<summary>What sort of NAS should I use?</summary>
+<br />
+
+In a nutshell, saltbox doesn't care.
+
+You can use an appliance like a Synology or QNAP, something like UNRAID or TrueNAS, or any other sort of "present some disks on the network" setup.
+
+There's nothing in the saltbox setup that cares about or depends on this.  The saltbox machine just needs to read and write to the storage.
+</details>
+
+First, create an rclone remote pointing to your NAS using whatever connection scheme you wish; SMB, SFTP, etc, provided rclone supports it.  Call it whatever you like.  This article will be referring to it as `THE_NAME_OF_THE_REMOTE_YOU_JUST_CREATED`. 
+
+!!! info
+    If your connection to this NAS is speedy enough, you could mount it at `/mnt/local/Media` as described in the "truly local storage" option above instead of using cloudplow.
 
 Then fill out the remote details in `settings.yml`
 ```ini
@@ -42,16 +64,16 @@ rclone:
   enabled: yes
   remotes:
     - remote: THE_NAME_OF_THE_REMOTE_YOU_JUST_CREATED
-        settings:
-          mount: yes
-          template: sftp # whatever template or service file is appropriate
-          union: yes
-          upload: yes
-          upload_from: /mnt/local/Media
-          vfs_cache:
-            enabled: no
-            max_age: 504h
-            size: 50G
+      settings:
+        mount: yes
+        template: sftp # whatever template or service file is appropriate
+        union: yes
+        upload: yes
+        upload_from: /mnt/local/Media
+        vfs_cache:
+          enabled: no
+          max_age: 504h
+          size: 50G
   version: latest
 ```
 

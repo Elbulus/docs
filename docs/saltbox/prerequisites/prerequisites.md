@@ -1,4 +1,16 @@
-# Presumptions
+---
+hide:
+  - tags
+tags:
+  - prerequisites
+  - assumptions
+  - install
+  - hardware
+  - os
+  - requirements
+---
+
+# Initial Assumptions
 
 Saltbox presumes you have a basic understanding of Linux, Docker containers, BitTorrent, and Usenet, and are also familiar with Sonarr, Radarr, NZBGet, qBittorrent, and Plex/Emby.
 
@@ -24,7 +36,7 @@ There are, broadly, 4 prerequisites to installing Saltbox:
 
 ### Operating Systems
 
-At this time, we only support LTS releases of Ubuntu Server [20.04](https://releases.ubuntu.com/20.04/) and [22.04](https://releases.ubuntu.com/22.04/), freshly installed.
+At this time, we only support LTS releases of Ubuntu Server [20.04](https://releases.ubuntu.com/20.04/), [22.04](https://releases.ubuntu.com/22.04/), or [24.04](https://releases.ubuntu.com/24.04/), freshly installed.
 
 !!! warning
     Desktop editions are excluded. While Saltbox may technically run alongside a desktop environment, we will decline all forms of support around this use case.
@@ -35,13 +47,17 @@ For best results, the assumed server environment for Saltbox is:
 
 - a dedicated remote server [not a VPS or a virtualized setup like proxmox],
 - with a processor compliant with the `x86_64`/`amd64` [`arm` NOT SUPPORTED] architecture,
-- running a brand new fresh install of the server version of Ubuntu 20.04 or 22.04,
+- running a brand new fresh install of the server version of Ubuntu 20.04, 22.04, or 24.04,
 - from a server provider like Hetzner, OVH, kimsufi, etc.,
 - nothing else [docker, for example] preinstalled,
 - with at least 500GB of disk space, and
 - allowing root access.
 
 See [here](../../reference/server.md) for more details about server requirements.
+
+#### Networking
+
+The server will need to be accessible from the internet via ports 22 [or whatever port you are using for SSH], 80, and 443; if this is a home server most likely you will need to configure port-forwarding in your router to send these ports to this device.
 
 ## Domain
 

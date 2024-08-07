@@ -1,3 +1,12 @@
+---
+hide:
+  - tags
+tags:
+  - radarr
+---
+
+# Radarr
+
 # What is it?
 
 [Radarr](https://radarr.video/) is a movie collection manager for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new movies and will interface with clients and indexers to grab, sort, and rename them. It can also be configured to automatically upgrade the quality of existing files in the library when a better quality format becomes available.
@@ -52,7 +61,7 @@ Make changes in the following sections:
             Reference: https://trash-guides.info/Radarr/Radarr-recommended-naming-scheme/
             </details>
 
-            The TRaSH naming guide is recommended since some other tools, notably Plex Meta Manager, expect it in their default setup.
+            The TRaSH naming guide is recommended since some other tools, notably Kometa, expect it in their default setup.
 
             <details>
             <summary>Plex's Naming Preference</summary> <br />
@@ -374,6 +383,11 @@ Make changes in the following sections:
 
 
         === "Autoscan"
+            IMPORTANT:  The Radarr UI may differ from what is shown here; there may be additional events listed in the UI.  
+
+            GENERALLY SPEAKING, if you have events listed that are not explicitly listed below, LEAVE THEM UNCHECKED.  Such events will generate errors in the autoscan logs; those errors can be ignored, but they are errors and can cause panic and confusion.
+
+            MORE SPECIFICALLY, Autoscan is expecting a request that points to an individual file that is ready for Plex. so any event you may have that refers to a movie being added, manual intervention, or anything else that is not "this specific video file ON DISK was imported/upgraded/deleted/etc", LEAVE IT UNCHECKED.
 
             1. Click "Settings" -> "Connect".
 

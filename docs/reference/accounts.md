@@ -1,3 +1,12 @@
+---
+hide:
+  - tags
+tags:
+  - accounts
+  - settings
+  - advanced
+---
+
 # Accounts and Settings
 
 !!! warning
@@ -73,25 +82,6 @@ Each tab shows a "section" in the file.
     
     This parameter is optional.
     Entering Dockerhub credentials increases the number of images one can pull.
-
-=== "plex"
-    ```yaml
-    plex:
-      user:
-      pass:
-      tfa: no
-    ```
-
-    `user` - Plex username or email address on the profile.
-
-    `pass` - Plex password. See the [password considerations](#password-considerations) below.  Wrap the password in quotes if it contains anything other than letters and numbers.
-
-    `tfa` - "yes" or "no" depending on whether you want to use the two-factor authentication [TFA] compatible Plex connection system.
-
-    This parameter is required.
-    This will be used to claim the Plex server under your username and generate Plex Access Tokens for apps such as Autoscan, etc.
-    Note: The "tfa" setting controls whether Saltbox uses the newer authentication method or not; this newer method is *required* for use with TFA, but will work even with it off; it's the "Open an URL, log into Plex, grant access to this app" workflow you may be familiar with from other contexts.
-    If you use the `tfa` workflow, a random client ID and a Plex Access Token will be stored in `/opt/saltbox/plex.ini` for later use.  Consider securing this file if you are running Saltbox on a shared machine.
 
 === "user"
     ```yaml
@@ -303,16 +293,11 @@ Each tab shows a "section" in the file.
     ```yaml
     gpu:
       intel: yes
-      nvidia: no
     ```
 
     `intel`: Should system be set up for Intel GPU?
 
     Default is `yes`.
-
-    `nvidia`: Should system be set up for NVidia GPU?
-
-    Default is `no`.
 
 === "mounts"
     ```yaml
@@ -349,7 +334,6 @@ Each tab shows a "section" in the file.
       provider: cloudflare
       subdomains:
         dash: dash
-        jaeger: jaeger
         metrics: metrics
       tracing: no
     ```
@@ -383,10 +367,6 @@ Each tab shows a "section" in the file.
     `subdomain.dash`: traefik dashboard subdomain.
 
     Default is `dash`.
-
-    `subdomain.jaeger`: traefik jaeger subdomain.
-
-    Default is `jaeger`.
 
     `subdomain.metrics`: traefik metrics subdomain.
 

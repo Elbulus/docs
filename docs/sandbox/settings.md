@@ -1,3 +1,11 @@
+---
+hide:
+  - tags
+tags:
+  - sandbox
+  - settings
+---
+
 # The Settings File
 
 The configuration file for Saltbox Sandbox settings is called settings.yml and is located at `/opt/sandbox/settings.yml`
@@ -52,8 +60,6 @@ notifiarr:
   ui_password: "username:password" # Password needs to be at least 16 characters long.
 ombix:
   roles: ["4k"]
-plex_meta_manager:
-  time: "03:00"
 qbit_manage:
   qbt_run: "false" # Default is "false"
   qbt_schedule: "30" # Default is "30"
